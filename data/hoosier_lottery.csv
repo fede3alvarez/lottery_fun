@@ -1,3 +1,4 @@
+Week_Day, Month, Day, Year, 0, 1, 2, 3, 4, 5 
 Saturday, December, 31, 1994, 7, 17, 21, 30, 32, 42
 Saturday, December, 24, 1994, 1, 10, 14, 36, 41, 44
 Saturday, December, 17, 1994, 9, 17, 19, 32, 40, 43
@@ -2667,6 +2668,7 @@ Wednesday, January, 13, 2021, 14, 17, 25, 33, 40, 46
 Saturday, January, 9, 2021, 9, 18, 28, 29, 41, 43
 Wednesday, January, 6, 2021, 5, 17, 29, 40, 42, 46
 Saturday, January, 2, 2021, 2, 19, 26, 31, 37, 43
+Saturday, June, 18, 2022, 2, 10, 13, 16, 43, 44
 Wednesday, June, 15, 2022, 17, 19, 23, 38, 41, 46
 Saturday, June, 11, 2022, 6, 8, 17, 22, 31, 42
 Wednesday, June, 8, 2022, 26, 33, 34, 39, 40, 44

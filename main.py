@@ -1,21 +1,16 @@
 #!/usr/bin/python3
 import os
 import pandas as pd
+import analysis_checks as ch
 
 lottery_data = 'hoosier_lottery.csv'
+candidate_numbers = 'candidates.csv'
 
 def main():
-    historic_data = get_data(lottery_data)
-    print(historic_data.head())
+    #historic_data = get_data(lottery_data, 'data')
+    #print(historic_data.head())
+    ch.check_candidate(lottery_data, candidate_numbers)
     return
-
-# Assuming all files read will be csv formay.
-def get_data(filename, directory='data'):
-    base_folder = os.path.dirname(__file__)
-    filename = os.path.join(base_folder, directory, filename)
-    
-    df = pd.read_csv(filename)
-    return df
 
 if __name__ == "__main__":
     main()
