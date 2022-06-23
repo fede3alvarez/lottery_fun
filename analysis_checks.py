@@ -56,8 +56,7 @@ def check_candidate(lottery_data, candidate_numbers):
     return
 
 # Assumes columns are named 0, 1, 2, 3, 4, 5
-# Checks for instances of a single number on a draw / set
-
+# Checks for instances of a single number on a df with draws / sets
 def check_single_number(df, a):
     df = df[((df['0'] == a) | 
              (df['1'] == a) | 
@@ -68,6 +67,8 @@ def check_single_number(df, a):
 
     return df
 
+
+# Checks for instances of a multiple numbers on a df with draws / sets
 def check_multiple_numbers(df, *args):
 
     # Limit entries to a max of 6
@@ -78,27 +79,24 @@ def check_multiple_numbers(df, *args):
 
     return df
 
-'''
 
-def number_subset(df_historic_data, df_candidates = None, num = 6):
-    
-    # If df_candidates is None, set it equal to df_input
-    if (df_candidates == None): df_candidates = df_historic_data
+# Based on a set / draw (included in df_candidates) 
+#       gets all the subsets / combinations of size "size"
+#       and finds all combinations in df_historic data
+def number_subset(df_historic_data, df_candidates, size = 6):
 
     # Initialize empty result df
     results = pd.DataFrame()
 
-    for attempt in range(df_candidates.shape[0]):
-        #print("Candidate #", attempt)
-        #print(candidates.loc[[attempt]].to_string(index=False, header=False))
+    # Iterate throught every entry
+    for entry in range(df_candidates.shape[0]):
 
-        attempt_numbers = df_candidates.loc[attempt, ['0', '1', '2', '3', '4', '5']]
-        attempt_comb = it.combinations(attempt_numbers, num)
+        entry_numbers = df_candidates.loc[entry, ['0', '1', '2', '3', '4', '5']]
+        entry_comb = it.combinations(entry_numbers, size)
 
-        #print(attempt_numbers)
-        #print(list(attempt_comb))
-
-        for comb in attempt_comb:
-            print(comb)
-    pass
-'''
+        # Iterate throught every combination of a single entry
+        for comb in entry_comb:
+            results = pd.concat([check_multiple_numbers(df_historic_data, comb), results], axis=0)
+            #results.append(check_multiple_numbers(df_historic_data, comb))
+            
+    return results
