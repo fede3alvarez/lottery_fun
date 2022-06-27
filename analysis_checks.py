@@ -31,7 +31,7 @@ def check_candidate(lottery_data, candidate_numbers):
     for attempt in range(candidates.shape[0]):
         print("Candidate #", attempt)
         print(candidates.loc[[attempt]].to_string(index=False, header=False))
-        results = check_number( historic_data,
+        results = check_multiple_numbers(historic_data,
                                 candidates.loc[attempt, '0'],
                                 candidates.loc[attempt, '1'],
                                 candidates.loc[attempt, '2'],
@@ -49,11 +49,9 @@ def check_candidate(lottery_data, candidate_numbers):
         print("-----------------------------")
         #df_employees['salary'] > 45000
         #p = events.where((events['s1_held'] == 0.0) & (events['s2_held'] == 0.0))
-    
-
-
-    
+       
     return
+
 
 # Assumes columns are named 0, 1, 2, 3, 4, 5
 # Checks for instances of a single number on a df with draws / sets
@@ -91,12 +89,31 @@ def number_subset(df_historic_data, df_candidates, size = 6):
     # Iterate throught every entry
     for entry in range(df_candidates.shape[0]):
 
+        # Remove entry from df_historic_data
+        entry_index = df_historic_data[ (df_historic_data['0'] == df_candidates.loc[entry, '0']) &
+                                        (df_historic_data['1'] == df_candidates.loc[entry, '1']) &
+                                        (df_historic_data['2'] == df_candidates.loc[entry, '2']) &
+                                        (df_historic_data['3'] == df_candidates.loc[entry, '3']) &
+                                        (df_historic_data['4'] == df_candidates.loc[entry, '4']) &
+                                        (df_historic_data['5'] == df_candidates.loc[entry, '5'])
+                                      ].index
+        df_historic_data.drop(entry_index, inplace=True)
+
+        '''
+        # Get indexes where name column has value john
+        indexNames = df[(df['name'] == 'john') & (df['name'] == 'john')].index
+
+        # Delete these row indexes from dataFrame
+        df.drop(indexNames , inplace=True)
+        '''
+
+        # Get entry and find combinations / subsets of numbers
         entry_numbers = df_candidates.loc[entry, ['0', '1', '2', '3', '4', '5']]
         entry_comb = it.combinations(entry_numbers, size)
 
         # Iterate throught every combination of a single entry
         for comb in entry_comb:
-            results = pd.concat([check_multiple_numbers(df_historic_data, comb), results], axis=0)
-            #results.append(check_multiple_numbers(df_historic_data, comb))
-            
+            #temp = check_multiple_numbers(df_historic_data, *comb)
+            results = pd.concat([check_multiple_numbers(df_historic_data, *comb), results], axis=0)
+
     return results
