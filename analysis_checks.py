@@ -90,22 +90,19 @@ def number_subset(df_historic_data, df_candidates, size = 6):
     for entry in range(df_candidates.shape[0]):
 
         # Remove entry from df_historic_data
-        entry_index = df_historic_data[ (df_historic_data['0'] == df_candidates.loc[entry, '0']) &
-                                        (df_historic_data['1'] == df_candidates.loc[entry, '1']) &
-                                        (df_historic_data['2'] == df_candidates.loc[entry, '2']) &
-                                        (df_historic_data['3'] == df_candidates.loc[entry, '3']) &
-                                        (df_historic_data['4'] == df_candidates.loc[entry, '4']) &
-                                        (df_historic_data['5'] == df_candidates.loc[entry, '5'])
+        entry_index = df_historic_data[ (df_historic_data['0'] == df_candidates.loc[entry, '0'].item())         &
+                                        (df_historic_data['1'] == df_candidates.loc[entry, '1'].item()) &
+                                        (df_historic_data['2'] == df_candidates.loc[entry, '2'].item()) &
+                                        (df_historic_data['3'] == df_candidates.loc[entry, '3'].item()) &
+                                        (df_historic_data['4'] == df_candidates.loc[entry, '4'].item()) &
+                                        (df_historic_data['5'] == df_candidates.loc[entry, '5'].item())
                                       ].index
+
         df_historic_data.drop(entry_index, inplace=True)
 
-        '''
-        # Get indexes where name column has value john
-        indexNames = df[(df['name'] == 'john') & (df['name'] == 'john')].index
-
-        # Delete these row indexes from dataFrame
-        df.drop(indexNames , inplace=True)
-        '''
+        print("---------------------")
+        print("DEBUG")
+        print("")
 
         # Get entry and find combinations / subsets of numbers
         entry_numbers = df_candidates.loc[entry, ['0', '1', '2', '3', '4', '5']]
