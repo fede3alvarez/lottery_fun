@@ -100,17 +100,13 @@ def number_subset(df_historic_data, df_candidates, size = 6):
 
         df_historic_data.drop(entry_index, inplace=True)
 
-        print("---------------------")
-        print("DEBUG")
-        print("")
-
         # Get entry and find combinations / subsets of numbers
         entry_numbers = df_candidates.loc[entry, ['0', '1', '2', '3', '4', '5']]
+
         entry_comb = it.combinations(entry_numbers, size)
 
         # Iterate throught every combination of a single entry
         for comb in entry_comb:
-            #temp = check_multiple_numbers(df_historic_data, *comb)
             results = pd.concat([check_multiple_numbers(df_historic_data, *comb), results], axis=0)
 
     return results
