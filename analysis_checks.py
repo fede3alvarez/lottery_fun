@@ -107,6 +107,11 @@ def number_subset(df_historic_data, df_candidates, size = 6):
 
         # Iterate throught every combination of a single entry
         for comb in entry_comb:
-            results = pd.concat([check_multiple_numbers(df_historic_data, *comb), results], axis=0)
+            #results = pd.concat([check_multiple_numbers(df_historic_data, *comb), results], axis=0)
+            result = check_multiple_numbers(df_historic_data, *comb)
+
+            if not(result.empty):
+                results = pd.concat([results, df_candidates.iloc[[entry]]], axis=0)
+                results = pd.concat([results, result], axis=0)
 
     return results
