@@ -28,9 +28,10 @@ def add_evens_and_odds(df, header=-1):
     if (header == -1):
         header = ["0" ,"1" ,"2" ,"3" ,"4" ,"5"]
     
-    for number in header:
-        df.loc[(df[number] // 2) == 0, 'Even'] = df['Even'] + 1
-        #df.loc[df['c1'] == 'Value', 'c2'] = 10
+    #for number in header:
+    df.loc[(df['0'] % 2) == 0, 'Even'] = df['Even'] + 1
+    df.loc[(df['0'] % 2) == 1, 'Odd'] = df['Odd'] + 1
+    #df.loc[df['c1'] == 'Value', 'c2'] = 10
     return df
 
 def even_odds(n, k):

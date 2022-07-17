@@ -47,8 +47,6 @@ def check_candidate(lottery_data, candidate_numbers):
             print(results)
 
         print("-----------------------------")
-        #df_employees['salary'] > 45000
-        #p = events.where((events['s1_held'] == 0.0) & (events['s2_held'] == 0.0))
        
     return
 
