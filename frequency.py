@@ -16,6 +16,7 @@ mpl.rcParams['figure.figsize'] = (8, 6)
 mpl.rcParams['axes.grid'] = False
 
 lottery_data = 'hoosier_lottery.csv'
+lottery_data = 'test.csv'
 candidate_numbers = 'candidates.csv'
 test_data_file = 'test_data.csv'
 
@@ -28,35 +29,17 @@ def main():
 def find_freq(df, ball_range=46):
     ball_range += 1
 
-    '''
-    pass
-
-    df['Age Category'] = 'Over 30'
-    df.loc[df['Age'] < 30, 'Age Category'] = 'Under 30'
-
-    df = df[((df['0'] == ball) | 
-             (df['1'] == ball) | 
-             (df['2'] == ball) | 
-             (df['3'] == ball) | 
-             (df['4'] == ball) | 
-             (df['5'] == ball))]
-
-        df[((df['0'] == ball) | 
-            (df['1'] == ball) | 
-            (df['2'] == ball) | 
-            (df['3'] == ball) | 
-            (df['4'] == ball) | 
-            (df['5'] == ball)), ball_header] = 1
-
-    df.loc[df['Age'] < 30, 'Age Category'] = 'Under 30'
-    '''
     for ball in range(ball_range):
 
         ball_header = "Ball_" + str(ball)
         df[ball_header] = 0
+        df.loc[df['0'] == ball, ball_header] = 1
+        df.loc[df['1'] == ball, ball_header] = 1
+        df.loc[df['2'] == ball, ball_header] = 1
+        df.loc[df['3'] == ball, ball_header] = 1
+        df.loc[df['4'] == ball, ball_header] = 1
+        df.loc[df['5'] == ball, ball_header] = 1
 
-        df[(df['0'] == ball), ball_header] = 1
-    print(df.head())
     return df
 
 """
